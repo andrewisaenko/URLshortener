@@ -1,0 +1,52 @@
+﻿@using System.Security.Claims
+@model URLshortener.Models.HomeViewModel
+<script src="~/js/site.js"></script>
+@{
+    ViewData["Title"] = "TABLE OF SHORTENED URLS";
+}
+
+<h1>TABLE OF SHORTENED URLS</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Original URL</th>
+            <th>Short URL</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var url in Model.ShortUrls)
+        {
+            <tr>
+                <td>@url.OriginalUrlCode</td>
+                <td><a href="@url.ShortUrlCode">@url.ShortUrlCode</a></td>
+                <td>@url.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || url.CreatedById == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))))
+                    {
+                        <form asp-action="DeleteShortUrl" asp-route-id="@url.Id" method="post">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h2>Add new URL</h2>
+        <form id="createForm">
+            <div class="form-group">
+                <label for="OriginalUrlCode">Original URL</label>
+                <input type="text" id="OriginalUrlCode" name="OriginalUrlCode" class="form-control" />
+                <span class="text-danger" id="errorOriginalUrlCode"></span>
+            </div>
+            <button type="button" onclick="createShortUrl()" class="btn btn-primary">Create short URL</button>
+        </form>
+    </div>
+}

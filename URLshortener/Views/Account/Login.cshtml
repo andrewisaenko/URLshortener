@@ -1,0 +1,14 @@
+﻿@model URLshortener.Models.LoginViewModel
+
+<h2>Login</h2>
+
+<main>
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <input type="submit" value="Login" />
+    </form>
+    <p>Not registered?<a href="/Account/Register">Register</a></p>
+</main>

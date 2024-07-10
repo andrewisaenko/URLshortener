@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <span class="Logo">URL Shortener</span>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/Home/about">About</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span>Привет, @User.Identity.Name!</span>
+                <a href="/Account/Logout">Sign out</a>
+            }
+            else
+            {
+                <a href="/Account/Login">Sign in</a>
+                <a href="/Account/Register">Register</a>
+            }
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>All rights reserved</footer>
+</body>
+</html>

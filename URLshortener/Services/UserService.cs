@@ -28,8 +28,6 @@ namespace URLshortener.Services
             return await Task.FromResult(_appDbContext.Users.FirstOrDefault(u => u.UserName == username));
         }
 
-
-
         public async Task CreateUserAsync(User user)
         {
             _appDbContext.Users.Add(user);

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using URLshortener.Data;
 using URLshortener.Models;
 
@@ -30,16 +31,14 @@ namespace URLshortener.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            // Получаем текущего пользователя
+         
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-
-            // Создаем новый ShortUrl
+           
             var shortUrl = new ShortUrl
             {
                 OriginalUrlCode = model.OriginalUrlCode,
-                ShortUrlCode = GenerateShortUrlCode(),
-                CreatedById = userId, // Устанавливаем ID текущего пользователя
+                ShortUrlCode = GenerateShortUrlCode(userId),
+                CreatedById = userId, 
                 CreatedDate = DateTime.UtcNow
             };
 
@@ -48,13 +47,25 @@ namespace URLshortener.Controllers
 
             return Ok(new { shortUrl.ShortUrlCode });
         }
-
-        // Example method to generate short URL code
-        private string GenerateShortUrlCode()
+                
+        private string GenerateShortUrlCode(int id)
         {
-            // Implement your logic to generate short URL code
-            // This is just an example
-            return Guid.NewGuid().ToString().Substring(0, 6);
+            const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            int baseLength = charset.Length;
+            var result = new StringBuilder();
+
+            while (id > 0)
+            {
+                result.Insert(0, charset[id % baseLength]);
+                id /= baseLength;
+            }
+         
+            if (result.Length == 0)
+            {
+                result.Append(charset[0]);
+            }
+
+            return result.ToString();
         }
 
         // GET: api/ShortUrl/{shortUrlCode}
@@ -67,14 +78,11 @@ namespace URLshortener.Controllers
             {
                 return NotFound();
             }
-
-            // Example of redirection
-            // For a real application, you may want to do a permanent redirect (HTTP 301) instead
+           
             return RedirectPermanent(shortUrl.OriginalUrlCode);
         }
     }
 
-    // Data transfer object (DTO) for creating a short URL
     public class ShortUrlCreateDto
     {
         public string OriginalUrlCode { get; set; }

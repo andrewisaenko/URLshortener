@@ -17,21 +17,7 @@ namespace URLshortener.Services
         {
             _context = context;
             _userService = userService;
-        }
-
-        public async Task CreateShortUrlAsync(ShortUrl shortUrl)
-        {
-            if (await ShortUrlExistsAsync(shortUrl.OriginalUrlCode))
-            {
-                throw new InvalidOperationException("URL already exists.");
-            }
-
-            shortUrl.ShortUrlCode = GenerateShortCode(shortUrl.Id);
-            shortUrl.CreatedDate = DateTime.UtcNow;
-            shortUrl.CreatedById = _userService.GetCurrentUserId();
-            _context.ShortUrls.Add(shortUrl);
-            await _context.SaveChangesAsync();
-        }
+        }        
 
         public async Task<List<ShortUrl>> GetAllShortUrlsAsync()
         {
@@ -69,31 +55,9 @@ namespace URLshortener.Services
                 await _context.SaveChangesAsync();
             }
         }
-
         public async Task<bool> ShortUrlExistsAsync(string originalUrl)
         {
             return await _context.ShortUrls.AnyAsync(u => u.OriginalUrlCode == originalUrl);
-        }
-
-        private string GenerateShortCode(int id)
-        {
-            const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            int baseLength = charset.Length;
-            var result = new StringBuilder();
-
-            while (id > 0)
-            {
-                result.Insert(0, charset[id % baseLength]);
-                id /= baseLength;
-            }
-
-            // If the result is empty (id was 0), return the first character in the charset
-            if (result.Length == 0)
-            {
-                result.Append(charset[0]);
-            }
-
-            return result.ToString();
-        }
+        }        
     }
 }

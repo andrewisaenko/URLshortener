@@ -8,7 +8,7 @@ function createShortUrl() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            originalUrlCode: originalUrl // Используем camelCase как в модели ShortUrl
+            originalUrlCode: originalUrl 
         })
     })
         .then(response => {
@@ -18,8 +18,7 @@ function createShortUrl() {
             return response.json();
         })
         .then(data => {
-            console.log('Successfully created short URL:', data);
-            // Логика для обновления интерфейса или перенаправления пользователя
+            console.log('Successfully created short URL:', data);            
         })
         .catch(error => {
             console.error('Error creating short URL:', error);

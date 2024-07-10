@@ -28,34 +28,6 @@ namespace URLshortener.Controllers
                 ShortUrls = await _shortUrlService.GetAllShortUrlsAsync()
             };
             return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddShortUrl(HomeViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                var newUrl = new ShortUrl
-                {
-                    OriginalUrlCode = model.NewShortUrl.OriginalUrlCode,
-                    CreatedById = userId,
-                    CreatedDate = DateTime.UtcNow
-                };
-
-                try
-                {
-                    await _shortUrlService.CreateShortUrlAsync(newUrl);
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError(string.Empty, ex.Message);
-                }
-            }
-
-            model.ShortUrls = await _shortUrlService.GetAllShortUrlsAsync();
-            return View("Index", model);
-        }
+        }        
     }
 }

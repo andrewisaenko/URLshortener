@@ -28,6 +28,11 @@ namespace URLshortener.Controllers
                 ShortUrls = await _shortUrlService.GetAllShortUrlsAsync()
             };
             return View(model);
-        }        
+        }
+
+        public IActionResult Test()
+        {
+            return View();
+        }
     }
 }

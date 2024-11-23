@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "About Us";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
 
-<h1>About algorithm</h1>
-<p>
-    The Base62 algorithm was chosen for generating short URLs due to its efficiency and compactness. Base62 utilizes digits and both uppercase and lowercase letters (from 0 to 9, A to Z, and a to z), allowing for the creation of short and easily readable links. Each URL is transformed from a numerical identifier into a string using this base-62 numeral system, ensuring uniqueness. This process uses the record ID rather than the original URL, guaranteeing the uniqueness of each shortened link.
-</p>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css?v=1" />
+</head>
+
+<body class="bg-dark text-light">
+
+    <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: calc(100vh - 120px);">
+        <h1 class="display-4 text-warning fw-bold mb-5">About the Algorithm</h1>
+
+        <div class="card bg-dark border-light shadow-lg text-light" style="max-width: 800px;">
+            <div class="card-body">
+                <p class="fs-5 mb-4">
+                    The <span class="text-warning fw-bold">Base62 algorithm</span> was chosen for generating short URLs due to its
+                    efficiency and compactness. Base62 utilizes digits, uppercase, and lowercase letters
+                    (<code>0-9</code>, <code>A-Z</code>, and <code>a-z</code>), creating short and easily readable links.
+                </p>
+                <p class="fs-5 mb-4">
+                    Each URL is transformed from a numerical identifier into a string using this base-62 numeral system,
+                    ensuring uniqueness. By encoding the record ID rather than the original URL,
+                    every shortened link remains unique.
+                </p>
+                <p class="fs-5 mb-0">
+                    This approach provides an optimal balance between simplicity and performance in URL shortening systems.
+                </p>
+            </div>
+        </div>
+
+        <a href="/" class="btn btn-warning btn-lg mt-5">
+            <i class="fa fa-arrow-left me-2"></i> Back to Home
+        </a>
+    </div>
+
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+</body>
+
+</html>

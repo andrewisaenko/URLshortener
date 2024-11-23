@@ -4,29 +4,51 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css?v=1" />
+
 </head>
 <body>
-    <header>
-        <span class="Logo">URL Shortener</span>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/Home/about">About</a>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <span>Привет, @User.Identity.Name!</span>
-                <a href="/Account/Logout">Sign out</a>
-            }
-            else
-            {
-                <a href="/Account/Login">Sign in</a>
-                <a href="/Account/Register">Register</a>
-            }
-        </nav>
+    <!-- Header Section -->
+    <header class="py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="h5" style="margin-bottom: 0;">URL Shortener</span>
+                <nav>
+                    <a href="/" class="mx-2">Home</a>
+                    <a href="/Home/About" class="mx-2">About</a>                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="mx-2">Hi, @User.Identity.Name!</span>
+                        <a href="/Account/Logout" class="mx-2">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login" class="mx-2">Sign in</a>
+                        <a href="/Account/Register" class="mx-2">Register</a>
+                    }
+                </nav>
+            </div>
+        </div>
     </header>
+
     <main>
-        @RenderBody()
+        <div class="container">
+            @RenderBody()
+        </div>
     </main>
-    <footer>All rights reserved</footer>
+
+    <!-- Footer Section -->
+    <footer class="footer text-center py-4">
+        <div class="container">
+            &copy; 2024 - URL Shortener. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

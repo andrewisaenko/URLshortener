@@ -1,52 +1,77 @@
-﻿@using System.Security.Claims
-@model URLshortener.Models.HomeViewModel
-<script src="~/js/site.js"></script>
-@{
-    ViewData["Title"] = "TABLE OF SHORTENED URLS";
-}
+﻿@using URLshortener.Models
+@model HomeViewModel
 
-<h1>TABLE OF SHORTENED URLS</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Original URL</th>
-            <th>Short URL</th>
-            <th>Date</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var url in Model.ShortUrls)
-        {
-            <tr>
-                <td>@url.OriginalUrlCode</td>
-                <td><a href="@url.ShortUrlCode">@url.ShortUrlCode</a></td>
-                <td>@url.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                <td>
-                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || url.CreatedById == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))))
-                    {
-                        <form asp-action="DeleteShortUrl" asp-route-id="@url.Id" method="post">
-                            <button type="submit" class="btn btn-danger">Удалить</button>
-                        </form>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener - Home</title>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <div>
-        <h2>Add new URL</h2>
-        <form id="createForm">
-            <div class="form-group">
-                <label for="OriginalUrlCode">Original URL</label>
-                <input type="text" id="OriginalUrlCode" name="OriginalUrlCode" class="form-control" />
-                <span class="text-danger" id="errorOriginalUrlCode"></span>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css?v=1" />
+    <link rel="stylesheet" href="~/css/index.css?v=1" />
+</head>
+
+<body class="bg-dark">
+    <div class="container my-5">
+        <!-- Entering a new URL to shorten -->
+        <div>
+            <div class="d-flex">
+                <input type="text" class="form-control bg-dark text-white me-2" id="originalUrl" placeholder="Enter the URL to shorten" />
+                <button class="btn btn-warning" id="shortenBtn">Shorten</button>
             </div>
-            <button type="button" onclick="createShortUrl()" class="btn btn-primary">Create short URL</button>
-        </form>
+        </div>
+
+        <!-- Block with URL table -->
+        <div class="card bg-dark border-light p-4 mt-5 rounded">
+            <div class="mb-4 d-flex justify-content-start align-items-center">
+                
+                <input type="text" class="form-control bg-dark text-white w-25 me-2" id="searchField" placeholder="Search for a URL" />
+                <button class="btn btn-warning" id="searchBtn">Search</button>
+            </div>
+
+            
+            <div class="border table-custom-style">
+                <table class="table table-dark table-bordered table-striped">
+                    <thead class="sticky-top">
+                        <tr>
+                            <th>Original URL</th>
+                            <th>Short URL</th>
+                            <th>Created By</th>
+                            <th>Created Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="urlTableBody">
+                        @foreach (var shortUrl in Model.ShortUrls)
+                        {
+                            <tr>
+                                <td>@shortUrl.OriginalUrlCode</td>
+                                <td><a href="@shortUrl.ShortUrlCode">@shortUrl.ShortUrlCode</a></td>
+                                <td>@shortUrl.CreatedBy?.UserName ?? "N/A"</td>
+                                <td>@shortUrl.CreatedDate.ToString("g")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-}
+
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script>
+        document.getElementById("shortenBtn").addEventListener("click", function () {
+            var originalUrl = document.getElementById("originalUrl").value;
+            
+        });
+
+        document.getElementById("searchBtn").addEventListener("click", function () {
+            var searchText = document.getElementById("searchField").value;
+           
+        });
+    </script>
+</body>
+
+</html>

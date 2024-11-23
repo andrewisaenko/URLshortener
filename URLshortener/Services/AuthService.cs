@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
 using URLshortener.Data;
 using URLshortener.Models;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace URLshortener.Services
 {

@@ -1,109 +1,44 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body{
-    background: silver; 
+body {
     font-family: 'Montserrat', sans-serif;
+    color: #E0E0E0;
 }
 
-header{
-    width:80%;
-    padding: 15px 10%;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #333;
-    border-bottom: 2px solid #000;
+main {
+    background-color: #212529;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    z-index: 1; 
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-header .logo {
-    font-weight: 600;
-    font-size: 25px;
+header {
+    background-color: #15171A;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
-
-header nav a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 15px
-}
-
-header nav a:hover {
-    text-decoration: underline
-}
-
-nav a[href="/Account/Login"],
-nav a[href="/Account/Register"] {
-    background-color: #ff6a00;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: #fff;
-    transition: background-color 0.3s;
-}
-
-    nav a[href="/Account/Login"]:hover,
-    nav a[href="/Account/Register"]:hover {
-        background-color: #d96614;
-    }
-
-main{
-    width: 80%;
-    padding: 15px 10%;
-    margin: 50px 0;
-}
-
-main label {
-    width: 100%;
-    margin-top: 10px;
-    display: block;
-}
-
-    main input:not([type="submit"]) {
-        width: 90%;
-        padding: 10px 14px;
-        font-size: 14px;
-        border-radius: 5px;
-        border: 1px solid silver;
-        outline: none;
-        margin-top: 7px;
-    }
-
-    main input:not([type="submit"]):focus {
-        border: 1px solid #ff0000;        
-    }
-
-    main input[type="submit"]{
-        width: 40%;
-        padding: 10px 0px;
-        text-align: center;
-        font-size: 15px;
-        border-radius: 5px;
-        border: 0;
-        margin-top: 7px;
-        background: #ff6a00;
-        font-weight: bold;
-    }
-
-    main input[type="submit"]:hover{
-        background: #d96614;        
-    }
-
-    main form span{
-        color: #ff0000;
-        font-weight: bold;
-        display: block;
-        margin: 5px 0;
-    }
-
 
 footer {
-    margin-top: 150px;
-    text-align: center;
-    width: 100%;
-    padding: 25px 0;
-    color: #fff;
-    background: #333;
-    border-bottom: 2px solid #000;
+    background-color: #15171A;
+    padding-top: 50px;
+    margin-top: -10px; 
+    position: relative;
+    z-index: 0;
 }
+
+a {
+    color: #E0E0E0;
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.2s, box-shadow 0.2s ease;
+    border-radius: 8px;
+}
+
+    a:hover, a:focus {
+        color: #ffc107;
+        box-shadow: 0 0 0 3px #ffc107;
+    }
+
+    

@@ -1,0 +1,25 @@
+﻿.table {
+    scroll-behavior: smooth;
+
+}
+
+.table-custom-style {
+    max-height: 550px;
+    overflow-y: auto;
+}
+ 
+  /*  .table td {
+        font-size: 1.7rem;
+    }*/
+
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6)
+}
+
+
+.form-control:focus, .form-control:hover {
+    box-shadow: none;
+    outline: none;
+    border-color: #ffc107;
+}

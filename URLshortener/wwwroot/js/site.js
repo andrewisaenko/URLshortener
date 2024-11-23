@@ -1,5 +1,4 @@
-﻿// site.js
-function createShortUrl() {
+﻿function createShortUrl() {
     var originalUrl = document.getElementById("OriginalUrlCode").value;
 
     fetch('/api/ShortUrl/create', {

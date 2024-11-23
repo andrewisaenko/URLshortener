@@ -1,14 +1,83 @@
-﻿@model URLshortener.Models.LoginViewModel
+﻿@using URLshortener.Models;
+@model LoginViewModel
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<main>
-    <form asp-controller="Account" asp-action="Login" method="post">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" type="password" />
-        <input type="submit" value="Login" />
-    </form>
-    <p>Not registered?<a href="/Account/Register">Register</a></p>
-</main>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDoList - Sign In</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/auth.css?v=1" />
+    <link rel="stylesheet" href="~/css/site.css?v=1" />
+
+</head>
+
+<body class="bg-dark text-white">
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card bg-dark border-light p-4" style="width: 350px;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="text-white">Sign In</h3>
+                <a href="/Account/Register" class="auth-form">Register</a>
+            </div>
+            <form asp-action="Login" asp-controller="Account" novalidate>
+
+                <!-- Username Input -->
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-light text-light">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <div class="form-floating">
+                            <input asp-for="Username" type="text" class="form-control bg-dark border-light text-white" id="Username" placeholder="My name is">
+                            <label for="Username">My name is</label>
+                        </div>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Username"></span>
+                </div>
+
+                <!-- Password Input -->
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-light text-light">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <div class="form-floating">
+                            <input asp-for="Password" type="password" class="form-control bg-dark border-light text-white" id="Password" placeholder="Password">
+                            <label for="Password" class="bg-transparent">Password</label>
+                        </div>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+
+                @* <!-- Remember Me and Forgot Password -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label text-light" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="text-warning">Lost your password?</a>
+                </div> *@
+
+                <!-- Submit Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-warning">Sign In</button>
+                </div>
+            </form>
+
+            <!-- Register Link -->
+            @* <div class="text-center mt-3">
+                <a href="/Account/Register" class="text-light">Create an Account</a>
+            </div> *@
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+
+</body>
+
+</html>

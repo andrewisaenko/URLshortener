@@ -13,7 +13,8 @@ namespace URLshortener.Controllers
 
         public HomeController(ShortUrlService shortUrlService)
         {
-            _shortUrlService = shortUrlService;
+            _shortUrlRepository = shortUrlRepository;
+            _prefixRepository = prefixRepository;
         }
 
         public IActionResult About()
